@@ -2,7 +2,7 @@
 //phai config dotenv truoc de su dung duoc bien
 require("dotenv").config();
 //connect Db
-const { connectDB } = require("./config/db");
+const { connectDB } = require("./configs/db");
 
 connectDB();
 
@@ -29,5 +29,5 @@ app.get("/", (req, res, next) => {
 const port = process.env.APP_PORT;
 
 app.listen(port, () => {
-  console.log(`server is runnign on port ${port}`);
+  console.log(`server is running on port ${port}`);
 });
