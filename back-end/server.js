@@ -1,14 +1,12 @@
-//entry point file
-//phai config dotenv truoc de su dung duoc bien
 require("dotenv").config();
-//connect Db
+
 const { connectDB } = require("./configs/db");
 
 connectDB();
 
 const express = require("express");
 const cors = require("cors");
-
+const authRoute = require('./routes/authRoute');
 const app = express();
 
 // Cors
@@ -17,14 +15,8 @@ app.use(cors());
 // Body Parser
 app.use(express.json());
 
-app.get("/", (req, res, next) => {
-  res.status(200).json({
-    status: "success",
-    data: {
-      posts: ["a1a"],
-    },
-  });
-});
+//Mount the route
+app.use('/api/v1/auth', authRoute);
 
 const port = process.env.APP_PORT;
 
