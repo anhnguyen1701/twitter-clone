@@ -28,7 +28,7 @@ exports.createOnePost = async (req, res, next) => {
       data: { post },
     });
   } catch (error) {
-    res.json(error);
+    next(error);
   }
 };
 
@@ -47,7 +47,7 @@ exports.updateOnePost = async (req, res, next) => {
       data: { post },
     });
   } catch (error) {
-    res.json(error);
+    next(error);
   }
 };
 
@@ -62,6 +62,6 @@ exports.deleteOnePost = async (req, res, next) => {
       message: "Post has been deleted",
     });
   } catch (error) {
-    res.json(error);
+    next(error);
   }
 };

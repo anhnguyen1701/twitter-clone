@@ -14,7 +14,7 @@ exports.register = async (req, res, next) => {
       },
     });
   } catch (error) {
-    res.json(error);
+    next(error);
   }
 };
 
@@ -23,6 +23,9 @@ exports.login = async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
       //err: email is not correct
+      const err = new Error("Email is not correct");
+      err.statusCode = 400;
+      return next(err);
     }
     if (bcrypt.compareSync(req.body.password, user.password)) {
       const token = jwt.sign({ userId: user._id }, process.env.APP_SECRET);
@@ -35,6 +38,11 @@ exports.login = async (req, res, next) => {
       });
     } else {
       //err: password is not correct
+      const err = new Error("Password is not correct");
+      err.statusCode = 400;
+      return next(err);
     }
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 };
