@@ -1,10 +1,23 @@
-import './App.css';
+import Header from './components/Header';
+import Login from './components/Login';
+import Register from './components/Register';
+import Main from './components/Main';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
-    <div className="App">
-      <h1>hello word</h1>
-    </div>
+    <Router>
+      <div className="container">
+        <Header></Header>
+        <Routes>
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/" element={<Main />} />
+          <Route exact path="*" element={<NotFound />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
